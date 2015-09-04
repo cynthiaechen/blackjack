@@ -5,8 +5,6 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop())
-    @last()
-
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -25,14 +23,14 @@ class window.Hand extends Backbone.Collection
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
-    @minScore() #@minScore() + 10 * @hasAce()]
+    @minScore(true) #@minScore() + 10 * @hasAce()]
 
   play: (playerScore) ->
     @at(0).flip()
-    minScore = @minScore(true)
+    minScore = @minScore()
     while minScore < 17
       @hit()
-      minScore = @minScore(true)
+      minScore = @minScore()
     if minScore > 21
     else if minScore > playerScore 
       @trigger('dealerWins')
