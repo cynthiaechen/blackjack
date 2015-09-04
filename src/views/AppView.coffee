@@ -34,7 +34,6 @@ class window.AppView extends Backbone.View
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
   reset: ->
-    console.log('works!')
     @model.reset()
     @initialize()
 

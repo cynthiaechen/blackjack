@@ -7,6 +7,5 @@ class window.App extends Backbone.Model
     @set 'dealerHand', deck.dealDealer()
 
   reset: ->
-    console.log('works!')
     @initialize()
 
