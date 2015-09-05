@@ -10,6 +10,12 @@ class window.App extends Backbone.Model
     @set 'dealerHand', @get('deck').dealDealer()
 
   reset: ->
+    @get('playerHand').each((card)->
+      @get('deck').unshift card.reveal()
+    , @)
+    @get('dealerHand').each((card)->
+      @get('deck').unshift card.reveal()
+    , @)
     @deal()
 
   playerHit: ->
