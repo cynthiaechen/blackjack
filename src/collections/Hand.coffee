@@ -5,6 +5,7 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop())
+    @last()
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -18,7 +19,7 @@ class window.Hand extends Backbone.Collection
   
   checkForBust: ->
     if @minScore() > 21
-      @trigger 'busted'
+      setTimeout( this.trigger("busted").bind(this), 100)
 
   scores: ->
     # The scores are an array of potential scores.

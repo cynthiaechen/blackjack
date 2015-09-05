@@ -6,13 +6,6 @@ class window.HandView extends Backbone.View
   initialize: ->
     @collection.on 'add remove change', => @render()
     @render()
-    @$el.on 'ready', =>
-      console.log 'hand ready'
-      @collection.checkForBust()
-
-  # events:
-  #   'ready': =>
-      
 
   render: ->
     @$el.children().detach()
@@ -20,5 +13,4 @@ class window.HandView extends Backbone.View
     @$el.append @collection.map (card) ->
       new CardView(model: card).$el
     @$('.score').text @collection.scores()
-    console.log "html rendered"
 

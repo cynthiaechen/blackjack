@@ -1,3 +1,8 @@
+body {
+  background: url('casino.jpg');
+  background-size: cover;
+}
+
 .card {
   float: left;
   border: solid 1px black;
@@ -5,10 +10,23 @@
   margin-right: 20px;
 }
 
-.covered {
-  background-color: black;
+.covered img {
+  content: url('../img/card-back.png');
 }
 
 .hand {
   overflow: auto;
+}
+
+/*.player-hand-container {
+  margin: 0 auto;
+}
+
+.dealer-hand-container {
+  margin: 0 auto;
+}
+*/
+
+.gameBoard {
+  margin: 0 auto;
 }
