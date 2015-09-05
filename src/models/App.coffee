@@ -32,7 +32,7 @@ class window.App extends Backbone.Model
     # if not bust continue
     else
       #check if over/under 17
-      if dealerHand.minScore() > 17
+      if dealerHand.scores() >= 17
         #some method that compares scores and triggers apropriate endgame event
         @compareScores()
       else
@@ -42,8 +42,8 @@ class window.App extends Backbone.Model
         undefined
 
   compareScores: ->
-    dealer = @get('dealerHand').minScore()
-    player = @get('playerHand').minScore()
+    dealer = @get('dealerHand').scores()
+    player = @get('playerHand').scores()
     if dealer > player
       @trigger 'endGame', 'Dealer ', 'wins'
     else if player > dealer
