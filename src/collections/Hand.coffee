@@ -10,20 +10,21 @@ class window.Hand extends Backbone.Collection
     memo or card.get('value') is 1
   , 0
 
-  minScore: (checkForBust = false) ->
-    score = @reduce (score, card) ->
+  minScore: ->
+    @reduce (score, card) ->
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
     #check if minScore > 21, if so, trigger bust event
-    if score > 21 and checkForBust
-      @trigger('busted', score)
-    score
+  
+  checkForBust: ->
+    if @minScore() > 21
+      @trigger 'busted'
 
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
-    @minScore(true) #@minScore() + 10 * @hasAce()]
+    @minScore() #@minScore() + 10 * @hasAce()]
 
   play: (playerScore) ->
     @at(0).flip()

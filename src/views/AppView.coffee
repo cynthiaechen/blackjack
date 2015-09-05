@@ -10,16 +10,11 @@ class window.AppView extends Backbone.View
     'click .stand-button': -> @model.get('dealerHand').play(@model.get('playerHand').minScore())
 
   initialize: ->
-    @playerHandView = new HandView(collection: @model.get 'playerHand')
-    @dealerHandView = new HandView(collection: @model.get 'dealerHand')
-
     @render()
     @model.get('playerHand').on 'busted', =>
-      @playerHandView.render()
       window.alert('Player busted!')
-      # @reset()
+      @reset()
     @model.get('dealerHand').on 'busted', => 
-      @dealerHandView.render()
       window.alert('Dealer busted!')
       @reset()
     @model.get('dealerHand').on 'dealerWins', =>
@@ -35,8 +30,8 @@ class window.AppView extends Backbone.View
   render: ->
     @$el.children().detach()
     @$el.html @template()
-    @$('.player-hand-container').html @playerHandView.el
-    @$('.dealer-hand-container').html @dealerHandView.el
+    @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
+    @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
   reset: ->
     @model.reset()
