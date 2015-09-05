@@ -6,26 +6,19 @@ class window.AppView extends Backbone.View
   '
 
   events:
-    'click .hit-button': -> @model.get('playerHand').hit()
-    'click .stand-button': -> @model.get('dealerHand').play(@model.get('playerHand').minScore())
+    'click .hit-button': -> @model.playerHit()
+    'click .stand-button': -> 
+      @model.get('dealerHand').at(0).flip()
+      @model.playOutDealer()
 
   initialize: ->
     @render()
-    @model.get('playerHand').on 'busted', =>
-      window.alert('Player busted!')
-      @reset()
-    @model.get('dealerHand').on 'busted', => 
-      window.alert('Dealer busted!')
-      @reset()
-    @model.get('dealerHand').on 'dealerWins', =>
-      window.alert('Dealer wins!')
-      @reset()
-    @model.get('dealerHand').on 'playerWins', =>
-      window.alert('Player wins!')
-      @reset()
-    @model.get('dealerHand').on 'push', =>
-      window.alert("It's a tie!")
-      @reset()
+    context = @
+    @model.on 'endGame', (name, condition) -> 
+      setTimeout ->
+        window.alert("#{name}#{condition}!")
+        context.reset()
+      , 100
 
   render: ->
     @$el.children().detach()
@@ -35,9 +28,4 @@ class window.AppView extends Backbone.View
 
   reset: ->
     @model.reset()
-    @initialize()
-
-    #app view listens to bust event, then alerts who wins (1: player hits/bust, 2: player stand/dealer wins, 3: player stand/player wins, 4: dealer hits/busts)
-
-
-
+    @render()

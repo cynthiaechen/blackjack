@@ -1,6 +1,7 @@
 body {
   background: url('casino.jpg');
   background-size: cover;
+  color: #fff;
 }
 
 .card {
