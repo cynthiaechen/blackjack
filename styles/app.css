@@ -4,6 +4,12 @@ body {
   color: #fff;
 }
 
+button {
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
 .card {
   float: left;
   border: solid 1px black;
@@ -19,14 +25,18 @@ body {
   overflow: auto;
 }
 
-/*.player-hand-container {
-  margin: 0 auto;
+h2 {
+  margin-left: 50px;
+}
+
+.player-hand-container {
+  margin-left: 500px;
 }
 
 .dealer-hand-container {
-  margin: 0 auto;
+  margin-left: 500px;
 }
-*/
+
 
 .gameBoard {
   margin: 0 auto;

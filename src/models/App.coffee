@@ -3,11 +3,14 @@
 class window.App extends Backbone.Model
   initialize: ->
     @set 'deck', deck = new Deck()
-    @set 'playerHand', deck.dealPlayer()
-    @set 'dealerHand', deck.dealDealer()
+    @deal()
+
+  deal: ->
+    @set 'playerHand', @get('deck').dealPlayer()
+    @set 'dealerHand', @get('deck').dealDealer()
 
   reset: ->
-    @initialize()
+    @deal()
 
   playerHit: ->
     playerHand = @get 'playerHand'
